@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model app {
+  id           String    @id
+  data         Json?
+  last_crawled DateTime?
+  last_updated DateTime?
+
+  @@index([data], map: "idx_data", type: Gin)
+}
